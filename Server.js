@@ -281,10 +281,10 @@ app.post('/apiv1/internal/misctoolsUpdateWebhook', (req, res) => {
         return;
     }
 
-    var scriptOutput = execSync('npm run get-misctools', { stdio: 'ignore', cwd: path.join(__dirname) });
+    execSync('npm run get-misctools', { stdio: 'ignore', cwd: path.join(__dirname) });
 
     // send response before restarting the server
-    res.status(200).send('OK\nScript stdio:\n' + scriptOutput.toString());
+    res.status(200).send('OK');
 
     execSync('sleep 1 && pm2 start deltamodders-server', { stdio: 'ignore', cwd: path.join(__dirname), detached: true });
 });
