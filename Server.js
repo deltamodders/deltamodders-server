@@ -264,12 +264,6 @@ app.get('/apiv1/internal/serverUpdate', (req, res) => {
         res.send('OK');
         return;
     }
-    var key = req.query.key;
-    var validKey = require('./assets/keys.json').serverUpdateKey;
-    if (key != validKey) {
-        res.status(404).send(error(404, "The page you are looking for does not exist."));
-        return;
-    }
 
     execSync('git fetch', { stdio: 'ignore', cwd: path.join(__dirname) });
     execSync('git pull', { stdio: 'ignore', cwd: path.join(__dirname) });

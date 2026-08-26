@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Notify server of commit
-        run: curl -fSL "https://deltamodders.com/apiv1/internal/serverUpdate?key=${{ secrets.SERVER_UPDATE_KEY }}"
+        run: curl -fSL "https://deltamodders.com/apiv1/internal/serverUpdate"
 
       - name: Wait 30 seconds
         run: sleep 30
