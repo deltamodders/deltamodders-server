@@ -266,8 +266,8 @@ app.get('/apiv1/internal/serverUpdate', (req, res) => {
     }
     var key = req.query.key;
     var validKey = require('./assets/keys.json').serverUpdateKey;
-    if (key !== validKey) {
-        next(); // make it 404 so people dont know this endpoint exists
+    if (key != validKey) {
+        res.status(404).send(error(404, "The page you are looking for does not exist."));
         return;
     }
 
