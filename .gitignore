@@ -4,3 +4,4 @@ itch.lookup.json
 server.log
 /node_modules
 package-lock.json
+/misctools

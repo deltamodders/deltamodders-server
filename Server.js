@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const PORT = process.argv.includes('--dev') ? 3000 : 80;
 const jwtkey = require('./assets/keys.json').jwtkey;
+const execSync = require('child_process').execSync;
 
 function logToDisk(logMessage) {
     const logFilePath = 'server.log';
@@ -30,16 +31,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/discord', (req, res) => {
-    res.redirect('https://discord.gg/EtxuMrk52C');
-});
-
-app.get('/deltamod/quickdl', (req, res) => {
-    var lat = require('./assets/deltamodLatest.json');
-    var os = req.query.os || "windows";
-    var url = os === "linux" ? lat.dlMirrorLinux : lat.dlMirrorWindows;
-    res.redirect(url);
-});
+/* Itch.io login + APIv1 itch */
 
 app.get('/login/itch', (req, res) => {
     res.sendFile(path.join(__dirname, 'assets/itchLogin.html'));
@@ -203,6 +195,8 @@ app.get('/apiv1/deltamod_itch_db/data', async (req, res) => {
     res.json({ success: true, data: userData.data });
 });
 
+/* API v1, deltamod */
+
 app.get('/apiv1/deltamod/latest', async (req, res) => {
     const latestData = JSON.parse(fs.readFileSync('assets/deltamodLatest.json', 'utf8'));
     const userVersion = req.query.v || null;
@@ -263,6 +257,29 @@ app.get('/apiv1/deltamod/latest', async (req, res) => {
     */
 });
 
+// Internal server update endpoint
+// This endpoint doesn't work in dev mode!
+app.get('/apiv1/internal/serverUpdate', (req, res) => {
+    if (process.argv.includes('--dev')) {
+        res.send('OK');
+        return;
+    }
+    var key = req.query.key;
+    var validKey = require('./assets/keys.json').serverUpdateKey;
+    if (key !== validKey) {
+        next(); // make it 404 so people dont know this endpoint exists
+        return;
+    }
+
+    execSync('git fetch', { stdio: 'ignore', cwd: path.join(__dirname) });
+    execSync('git pull', { stdio: 'ignore', cwd: path.join(__dirname) });
+    execSync('npm install', { stdio: 'ignore', cwd: path.join(__dirname) });
+
+    res.send('OK');
+
+    execSync('sleep 1 && pm2 start deltamodders-server', { stdio: 'ignore', cwd: path.join(__dirname), detached: true });
+});
+
 // static files
 app.use('/misctools', express.static('misctools'));
 app.use('/', express.static('pub'));
@@ -277,8 +294,8 @@ app.use((req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Webserver is running on port ${PORT}`);
     if (PORT == 3000) {
-        exec('start http://localhost:3000');
+        execSync('start http://localhost:3000');
     }
 });

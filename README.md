@@ -4,7 +4,7 @@ This webserver powers the backend of deltamodders.com
 # Config
 You will need to create a `keys.json` file to run the server.
 
-Copy `keys.example.json` (in `assets`), paste a valid JWT key there and rename to `keys.json`.
+Copy `keys.example.json` (in `assets`), paste a valid JWT key (and make a server update key) there and rename to `keys.json`.
 
 Current keys are not here for security reasons; contact Ghino if you need the keys used on the server.
 

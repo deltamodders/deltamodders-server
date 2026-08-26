@@ -1,3 +1,4 @@
 {
-    "jwtkey": "INSERT JWT KEY HERE (SHA256)"
+    "jwtkey": "INSERT JWT KEY HERE (SHA256)",
+    "serverUpdateKey": "INSERT SERVER UPDATE KEY HERE (ANY STRING)"
 }
