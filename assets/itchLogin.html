@@ -75,24 +75,7 @@
                     displayError('Deltamod is not running correctly!');
                     return;
                 }
-                fetch(path + '?token=' + json.token, {
-                    method: 'GET',
-                    headers: {
-                        'X-State': params.get("state"),
-                        'X-Token': json.token
-                    }
-                })
-                    .then(() => {
-                        window.close();
-                        
-                        document.querySelector('.errorBox').style.color = 'rgb(121, 255, 121)';
-                        document.querySelector('.errorBox').style.borderColor = 'rgb(121, 255, 121)';
-                        document.querySelector('.errorBox h1').innerText = 'Login successful!';
-                        document.querySelector('.errorBox p').innerText = 'You can now close this window.';
-                    })
-                    .catch(err => {
-                        displayError('Failed to connect to Deltamod!');
-                    });
+                window.location.href = path + '?token=' + json.token;
                 
             }
             else {
