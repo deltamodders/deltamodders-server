@@ -2,6 +2,12 @@
 This webserver powers the backend of deltamodders.com
 
 # Config
+## MiscTools
+Run `npm run get-misctools` to download, build and put MiscTools in the server.
+
+Make sure your Git is configured with your account, as the MiscTools repo is private.
+
+## keys.json
 You will need to create a `keys.json` file to run the server.
 
 Copy `keys.example.json` (in `assets`), paste a valid JWT key (and make a server update key) there and rename to `keys.json`.
