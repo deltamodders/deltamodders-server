@@ -279,6 +279,14 @@ app.post('/apiv1/internal/serverUpdateWebhook', (req, res) => {
 app.use('/misctools', express.static('misctools'));
 app.use('/', express.static('pub'));
 
+// redirects
+app.get('/discord', (req, res) => {
+    res.redirect('https://discord.gg/EtxuMrk52C');
+});
+app.get('/remoterune', (req, res) => {
+    res.redirect('https://remoterune.net/?utm_source=deltamodders');
+});
+
 // 404
 app.use((req, res, next) => {
     var msg = "The page you are looking for does not exist.";
