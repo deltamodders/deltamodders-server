@@ -7,8 +7,9 @@
   "type": "commonjs",
   "main": "Server.js",
   "scripts": {
-    "test": "node Server.js",
-    "start": "node server.js"
+    "test": "node Server.js --dev",
+    "start": "node server.js",
+    "get-misctools": "node utils/get-misctools.js"
   },
   "dependencies": {
     "axios": "^1.18.1",
