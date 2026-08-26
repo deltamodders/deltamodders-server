@@ -259,7 +259,7 @@ app.get('/apiv1/deltamod/latest', async (req, res) => {
 
 // Internal server update endpoint
 // This endpoint doesn't work in dev mode!
-app.get('/apiv1/internal/serverUpdate', (req, res) => {
+app.post('/apiv1/internal/serverUpdate', (req, res) => {
     if (process.argv.includes('--dev')) {
         res.send('OK');
         return;
