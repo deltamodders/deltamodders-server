@@ -1,0 +1,19 @@
+{
+  "name": "deltamodders-com",
+  "version": "1.0.0",
+  "description": "DELTAModders.com Website Code",
+  "license": "UNLICENSED",
+  "author": "DELTAModders",
+  "type": "commonjs",
+  "main": "Server.js",
+  "scripts": {
+    "test": "node Server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.18.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {}
+}

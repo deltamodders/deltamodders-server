@@ -1,0 +1,21 @@
+<svg width="100%" height="120" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <defs>
+    <filter id="soften">
+      <feGaussianBlur stdDeviation="0.8" />
+    </filter>
+  </defs>
+
+  <rect width="1440" height="120" fill="transparent"/>
+
+  <!-- Wave layer 1 -->
+  <path d="M0,80 C240,110 360,50 600,80 C840,110 960,50 1200,80 C1320,95 1380,100 1440,90 L1440,0 L0,0 Z"
+        fill="rgba(180,180,180,0.10)" filter="url(#soften)"/>
+
+  <!-- Wave layer 2 -->
+  <path d="M0,60 C200,30 400,100 600,65 C800,30 1000,95 1200,60 C1320,35 1380,40 1440,50 L1440,0 L0,0 Z"
+        fill="rgba(170,170,170,0.07)" filter="url(#soften)"/>
+
+  <!-- Wave layer 3 -->
+  <path d="M0,40 C240,60 360,10 600,35 C840,60 960,15 1200,40 C1320,50 1380,45 1440,35 L1440,0 L0,0 Z"
+        fill="rgba(160,160,160,0.05)" filter="url(#soften)"/>
+</svg>

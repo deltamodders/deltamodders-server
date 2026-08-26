@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DELTAModders</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div>
+        <div class="topbar">
+            <img src="/assets/logo.png" alt="" srcset="" width="200">
+        </div>
+        <div class="viewport" style="justify-content: center; align-items: center;">
+            <div class="errorBox">
+                <h1 style="font-size: 2rem;">Please wait...</h1>
+                <p>DELTAModders is logging in with your itch.io account.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+    h1 {
+        margin-top: 0;
+    }
+    .errorBox {
+        display: inline-flex; 
+        justify-content: center; 
+        align-items: center; 
+        color: white; 
+        text-align: center; 
+        flex-direction: column; 
+        padding: 50px;
+        border: 1px solid rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+
+        height: fit-content !important;
+    }
+</style>
+<script>
+    function displayError(message) {
+        document.querySelector('.errorBox').style.color = 'rgb(255, 121, 121)';
+        document.querySelector('.errorBox').style.borderColor = 'rgb(255, 121, 121)';
+        document.querySelector('.errorBox h1').innerText = 'Couldn\'t login';
+        document.querySelector('.errorBox p').innerText = message;
+    }
+
+    (async () => {
+        var queryString = window.location.hash.slice(1);
+        var params = new URLSearchParams(queryString);
+        var token = params.get("access_token");
+
+        if (token) {
+            var res = await fetch('/login/itch/callback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: token })
+            });
+
+            var json = await res.json();
+
+            if (json.success) {
+                var path = await fetch('http://localhost:2900/addr').then(res => res.text()).catch(err => {
+                    displayError('Failed to connect to Deltamod!');
+                });
+                if (!path.startsWith('http://localhost:2900')) {
+                    displayError('Deltamod is not running correctly!');
+                    return;
+                }
+                fetch(path + '?token=' + json.token, {
+                    method: 'GET',
+                    headers: {
+                        'X-State': params.get("state"),
+                        'X-Token': json.token
+                    }
+                })
+                    .then(() => {
+                        window.close();
+                        
+                        document.querySelector('.errorBox').style.color = 'rgb(121, 255, 121)';
+                        document.querySelector('.errorBox').style.borderColor = 'rgb(121, 255, 121)';
+                        document.querySelector('.errorBox h1').innerText = 'Login successful!';
+                        document.querySelector('.errorBox p').innerText = 'You can now close this window.';
+                    })
+                    .catch(err => {
+                        displayError('Failed to connect to Deltamod!');
+                    });
+                
+            }
+            else {
+                displayError(json.error || 'An unknown error occurred during login.');
+            }
+        }
+        else {
+            displayError('No token found in the URL!');
+        }
+    })();
+</script>
+</html>

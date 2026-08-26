@@ -1,0 +1,190 @@
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items:flex-end;
+    padding: 10px 40px;
+    background: url("./assets/sbar.svg") repeat-x;
+    z-index: 2;
+}
+.topbar > * {
+    transform: translateY(-10px);
+}
+
+button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.noticeBlue {
+    color: rgb(46, 114, 222);
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-top: 15px;
+    padding: 5px 15px;
+    border: 1px solid rgb(46, 114, 222);
+    border-radius: 5px;
+}
+
+.noticeFlex {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+button {
+    padding: 8px 15px;
+    background: linear-gradient(180deg, #3f3f3f 0%, #262626 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'DELTARUNE', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+blue {
+    color: rgb(78, 146, 255);
+}
+
+button:hover {
+    scale: 1.05;
+    background: linear-gradient(180deg, #4a4a4a 0%, #2c2c2c 100%);
+}
+
+.content .downloads {
+    margin-top: 10px;
+    opacity: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 10px;
+
+    padding: 10px;
+
+    transition: all 0.9s ease;
+}
+
+@font-face {
+    font-family: "DELTARUNE";
+    src: url("./assets/DELTARUNE.woff");
+}
+
+#deltamod2 {
+    filter: saturate(20%);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+small {
+    font-size: 0.8em;
+    color: gray;
+}
+.viewport {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    overflow-y: auto;
+    perspective: 1000px;
+}
+
+.projectCard .content .txt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.projectCard:not(:hover) > .content {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 1) 70%);
+
+    backdrop-filter: blur(0px);
+
+    transition: all 0.5s ease;
+}
+
+.projectCard > .content > .txt > .authors {
+    margin-top: 10px;
+}
+
+.projectCard:hover > .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+
+    backdrop-filter: blur(10px);
+
+    transition: all 0.5s ease;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.viewport::-webkit-scrollbar {
+    display: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 5px;
+}
+
+.projectCard {
+    opacity: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    text-align: center;
+    color: white;
+    user-select: none;
+
+    border-left: 2px solid rgba(125, 125, 125, 0.5);
+    border-right: 2px solid rgba(125, 125, 125, 0.5);
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.viewport > .projectCard {
+    flex: 1 1 33.333%;
+    width: 33.333%;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    font-family: 'DELTARUNE', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
