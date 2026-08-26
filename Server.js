@@ -259,9 +259,9 @@ app.get('/apiv1/deltamod/latest', async (req, res) => {
 
 // Internal server update endpoint
 // This endpoint doesn't work in dev mode!
-app.post('/apiv1/internal/serverUpdate', (req, res) => {
+app.post('/apiv1/internal/serverUpdateWebhook', (req, res) => {
     if (process.argv.includes('--dev')) {
-        res.send('OK');
+        res.status(200).send('OK');
         return;
     }
 
@@ -269,7 +269,8 @@ app.post('/apiv1/internal/serverUpdate', (req, res) => {
     execSync('git pull', { stdio: 'ignore', cwd: path.join(__dirname) });
     execSync('npm install', { stdio: 'ignore', cwd: path.join(__dirname) });
 
-    res.send('OK');
+    // send response before restarting the server
+    res.status(200).send('OK');
 
     execSync('sleep 1 && pm2 start deltamodders-server', { stdio: 'ignore', cwd: path.join(__dirname), detached: true });
 });
