@@ -1,17 +1,17 @@
 name: Deploy to prod
 
 on:
-	push
+  push:
 
 jobs:
-	ping-and-check:
-		runs-on: ubuntu-latest
-		steps:
-			- name: Notify server of commit
-				run: curl -fSL "https://deltamodders.com/apiv1/internal/serverUpdate?key=HEH_ITS_MY_JARONA"
+  ping-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify server of commit
+        run: curl -fSL "https://deltamodders.com/apiv1/internal/serverUpdate?key=${{ secrets.SERVER_UPDATE_KEY }}"
 
-			- name: Wait 30 seconds
-				run: sleep 30
+      - name: Wait 30 seconds
+        run: sleep 30
 
-			- name: Check server status
-				run: curl -fSL https://deltamodders.com/
+      - name: Check server status
+        run: curl -fSL "https://deltamodders.com/"
