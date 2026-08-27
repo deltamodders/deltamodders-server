@@ -1,7 +1,7 @@
 const execSync = require('child_process').execSync;
 const path = require('path');
 const fs = require('fs');
-const REPO_URL = 'git@github.com:deltamodders/misctools.git';
+const REPO_URL = 'https://github.com/deltamodders/misctools.git';
 
 function copyDir(source, destination) {
 	fs.mkdirSync(destination, { recursive: true });
@@ -25,7 +25,7 @@ if (fs.existsSync(path.join(__dirname, '..', 'misctools'))) {
 
 console.log('Cloning MiscTools repository... (you may need to authenticate with your GitHub)');
 
-execSync('git clone ' + REPO_URL, { stdio: 'ignore', cwd: path.join(__dirname) });
+execSync('gh repo clone ' + REPO_URL, { stdio: 'ignore', cwd: path.join(__dirname) });
 
 console.log('Building MiscTools...');
 
