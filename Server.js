@@ -198,14 +198,6 @@ app.get('/apiv1/deltamod_itch_db/data', async (req, res) => {
 /* API v1, deltamod */
 
 app.get('/apiv1/deltamod/latest', async (req, res) => {
-    // Disabled for now
-    res.json({
-        update: false,
-        newVersionLink: "",
-        version: ""
-    });
-    return;
-
     const latestData = JSON.parse(fs.readFileSync('assets/deltamodLatest.json', 'utf8'));
     const userVersion = req.query.v || null;
     if (!userVersion) {

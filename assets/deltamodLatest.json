@@ -1,5 +1,5 @@
 {
-    "latestVersion": "2.1.0",
-    "dlMirrorWindows": "https://filecache39.gamebanana.com/tools/deltamod-210-win-installer.exe",
-    "dlMirrorLinux": "https://filecache38.gamebanana.com/tools/deltamod-201-lin-appimage.zip"
+    "latestVersion": "2.1.1",
+    "dlMirrorWindows": "https://filecache39.gamebanana.com/tools/deltamod-211-win-setup.exe",
+    "dlMirrorLinux": "https://filecache38.gamebanana.com/tools/deltamod-211-linux-appimage.zip"
 }
