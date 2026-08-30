@@ -268,6 +268,7 @@ app.post('/apiv1/internal/serverUpdateWebhook', (req, res) => {
     execSync('git fetch', { stdio: 'ignore', cwd: path.join(__dirname) });
     execSync('git pull', { stdio: 'ignore', cwd: path.join(__dirname) });
     execSync('npm install', { stdio: 'ignore', cwd: path.join(__dirname) });
+    execSync('npm run get-misctools', { stdio: 'ignore', cwd: path.join(__dirname) });
 
     // send response before restarting the server
     res.status(200).send('OK');
