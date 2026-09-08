@@ -5,10 +5,14 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const app = express();
 const PORT = process.argv.includes('--dev') ? 3000 : 80;
-const jwtkey = require('./assets/keys.json').jwtkey;
 const execSync = require('child_process').execSync;
 
 const flags = require('./package.json').flags || {};
+
+if (flags.ITCH_IO_SERVICE && !process.argv.includes('--dev')) {
+    console.log("Itch.io service is enabled.");
+    const jwtkey = require('./assets/keys.json').jwtkey;
+}
 
 function logToDisk(logMessage) {
     const logFilePath = 'server.log';
