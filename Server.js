@@ -8,6 +8,8 @@ const PORT = process.argv.includes('--dev') ? 3000 : 80;
 const jwtkey = require('./assets/keys.json').jwtkey;
 const execSync = require('child_process').execSync;
 
+const flags = require('./package.json').flags || {};
+
 function logToDisk(logMessage) {
     const logFilePath = 'server.log';
     if (!fs.existsSync(logFilePath)) {
@@ -34,11 +36,15 @@ app.use((req, res, next) => {
 /* Itch.io login + APIv1 itch */
 
 app.get('/login/itch', (req, res) => {
+    if (!flags.ITCH_IO_SERVICE) {
+        res.status(200).send(error("Not available", "This service is not available at the moment."));
+        return;
+    }
     res.sendFile(path.join(__dirname, 'assets/itchLogin.html'));
 });
 app.post('/login/itch/callback', async (req, res) => {
-    if (!req.headers['user-agent']) {
-        res.json({ success: false, error: "Invalid request" });
+    if (!flags.ITCH_IO_SERVICE) {
+        res.status(200).send(error("Not available", "This service is not available at the moment."));
         return;
     }
     var token = req.body.token;
@@ -113,6 +119,10 @@ app.post('/login/itch/callback', async (req, res) => {
     res.json({ success: true, token: generatedToken });
 });
 app.get('/apiv1/deltamod_itch/:token', (req, res) => {
+    if (!flags.ITCH_IO_SERVICE) {
+        res.status(200).json({ success: false, error: "This service is not available at the moment." });
+        return;
+    }
     var token = req.params.token;
     if (!token) {
         res.json({ success: false, error: "Missing token" });
@@ -133,6 +143,10 @@ app.get('/apiv1/deltamod_itch/:token', (req, res) => {
 });
 
 app.post('/apiv1/deltamod_itch_db/data', (req, res) => {
+    if (!flags.ITCH_IO_SERVICE) {
+        res.status(200).json({ success: false, error: "This service is not available at the moment." });
+        return;
+    }
     var token = req.body.token;
     var data = atob(req.body.data);
 
@@ -171,6 +185,10 @@ app.post('/apiv1/deltamod_itch_db/data', (req, res) => {
 });
 
 app.get('/apiv1/deltamod_itch_db/data', async (req, res) => {
+    if (!flags.ITCH_IO_SERVICE) {
+        res.status(200).json({ success: false, error: "This service is not available at the moment." });
+        return;
+    }
     var token = req.query.token;
     if (!token) {
         res.json({ success: false, error: "Missing token" });

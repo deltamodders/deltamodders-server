@@ -15,4 +15,6 @@ Copy `keys.example.json` (in `assets`), paste a valid JWT key (and make a server
 Current keys are not here for security reasons; contact Ghino if you need the keys used on the server.
 
 # License
-This software is private and shall only be viewed by authorized DELTAModders members.
+This software is publicly viewable, but you may not fork, use, modify or otherwise clone a copy of it without authorization. 
+
+You may only view the software and modify it with the intention of making a pull request to it.

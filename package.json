@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "eslint": "^10.9.1"
+  },
+  "flags": {
+    "ITCH_IO_SERVICE": false
   }
 }
