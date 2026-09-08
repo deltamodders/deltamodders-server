@@ -1,7 +1,7 @@
 const execSync = require('child_process').execSync;
 const path = require('path');
 const fs = require('fs');
-const REPO_URL = 'git@github.com/deltamodders/misctools.git';
+const REPO_URL = 'https://github.com/deltamodders/misctools.git';
 
 function copyDir(source, destination) {
 	fs.mkdirSync(destination, { recursive: true });
