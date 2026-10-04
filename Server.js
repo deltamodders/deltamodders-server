@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const app = express();
-const PORT = (parseInt(process.argv[process.argv.indexOf('--port') + 1]) || 2000);
+const PORT = (parseInt(process.argv[process.argv.indexOf('--port') + 1]) || 80);
 const execSync = require('child_process').execSync;
 
 const flags = require('./package.json').flags || {};
