@@ -9,9 +9,10 @@ const execSync = require('child_process').execSync;
 
 const flags = require('./package.json').flags || {};
 
+let jwtkey = "default_jwt_key";
 if (flags.ITCH_IO_SERVICE && !process.argv.includes('--dev')) {
     console.log("Itch.io service is enabled.");
-    const jwtkey = require('./assets/keys.json').jwtkey;
+    jwtkey = require('./assets/keys.json').jwtkey;
 }
 
 function logToDisk(logMessage) {
