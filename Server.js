@@ -298,6 +298,11 @@ app.post('/apiv1/internal/serverUpdateWebhook', (req, res) => {
     execSync('sleep 1 && pm2 start deltamodders-server', { stdio: 'ignore', cwd: path.join(__dirname), detached: true });
 });
 
+app.get('/itch-privacy.pdf', (req, res) => {
+    res.status(301);
+    res.setHeader('Location', '/tos/itch.html');
+    res.end();
+});
 // static files
 app.use('/misctools', express.static('misctools'));
 app.use('/', express.static('pub'));
