@@ -123,6 +123,50 @@ app.post('/login/itch/callback', async (req, res) => {
 
     res.json({ success: true, token: generatedToken });
 });
+app.post('/apiv1/deltamod_itch_gdpr', async (req, res) => {
+    var quikLookupPath = path.join(__dirname, 'itch.lookup.json');
+    if (!fs.existsSync(quikLookupPath)) {
+        fs.writeFileSync(quikLookupPath, JSON.stringify({
+            existingItchUsers: []
+        }));
+    }
+    var quikLookup = JSON.parse(fs.readFileSync(quikLookupPath, 'utf8'));
+    
+    if (!flags.ITCH_IO_SERVICE) {
+        res.status(200).json({ success: false, error: "This service is not available at the moment." });
+        return;
+    }
+    var token = req.body.token;
+    if (!token) {
+        res.send('No valid token provided. <a href="/tos/itch.html">Return to Itch.io Terms of Service</a>.');
+        return;
+    }
+
+    var user = await axios.get('https://api.itch.io/profile', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }).catch(() => null);
+
+    if (!user || !user.data || !user.data.user.id) {
+        res.send('No valid token provided. <a href="/tos/itch.html">Return to Itch.io Terms of Service</a>.');
+        return;
+    }
+
+    if (quikLookup.existingItchUsers.map(u => u.id).indexOf(user.data.user.id) !== -1) {
+        var existingUser = quikLookup.existingItchUsers.find(u => u.id === user.data.user.id);
+        var existingUserDataPath = path.join(__dirname, 'itch.db', `${existingUser.uuid}.json`);
+        if (fs.existsSync(existingUserDataPath)) {
+            fs.unlinkSync(existingUserDataPath);
+        }
+        quikLookup.existingItchUsers = quikLookup.existingItchUsers.filter(u => u.id !== user.data.user.id);
+        fs.writeFileSync(quikLookupPath, JSON.stringify(quikLookup));
+        res.send('Your account and data (' + user.data.user.username + ') have been deleted successfully. <a href="/tos/itch.html">Return to Itch.io Terms of Service</a>.');
+    }
+    else {
+        res.send('No DELTAModders account found for ' + user.data.user.username + '. <a href="/tos/itch.html">Return to Itch.io Terms of Service</a>.');
+    }
+});
 app.get('/apiv1/deltamod_itch/:token', (req, res) => {
     if (!flags.ITCH_IO_SERVICE) {
         res.status(200).json({ success: false, error: "This service is not available at the moment." });

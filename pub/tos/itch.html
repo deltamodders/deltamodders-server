@@ -41,7 +41,19 @@
             Your information is used to authenticate your account, provide the integration's features, and store and retrieve the data associated with your account.<br /><br />
             <b>Data Deletion</b><br /><br />
             You may contact the website owners at <a href="mailto:ghinorhino@deltamodders.com">ghinorhino@deltamodders.com</a> to request deletion of
-            your stored data. Deletion requests will be handled where reasonably possible.
+            your stored data. Deletion requests will be handled where reasonably possible.<br />
+            You may also delete your account autonomously via this form:
+            <div class="gdprForm">
+                <h3>Delete your account</h3>
+                <form action="/apiv1/deltamod_itch_gdpr" method="POST">
+                    <p>
+                        First of all, you will need your itch.io unique token for Deltamod-related services. 
+                        <a target="_blank" rel="noopener noreferrer" href="https://itch.io/user/oauth?client_id=605f3bf508de861ba94641192b43e69d&scope=profile%3Ame&response_type=token&redirect_uri=urn:ietf:wg:oauth:2.0:oob">Login via this link and take note of it.</a>
+                    </p>
+                    <input type="text" name="token" placeholder="Paste your token here" style="width: calc(100% - 32px); margin-top: 10px;" />
+                    <button type="submit" style="margin-top: 10px;">Delete my account</button>
+                </form>
+            </div>
             <br /><br />
             This Privacy Policy may be updated from time to time. Continued use of the integration after
             changes are made constitutes acceptance of the updated policy.<br /><br />
@@ -62,6 +74,30 @@
 </script>
 
 <style>
+    input {
+        background-color: #212121;
+        color: white;
+        border: 1px solid #363636;
+        padding: 5px;
+        width: calc(100% - 12px);
+        font-family: 'DELTARUNE', sans-serif;
+    }
+    h3 {
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+    p {
+        margin-bottom: 0px;
+    }
+    .gdprForm {
+        background-color: #1a1a1a;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        margin-top: 20px;
+        min-height: 100px;
+    }
     .redirInfo {
         background-color: #3b3000;
         color: white;
