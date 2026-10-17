@@ -22,7 +22,10 @@ function log(...messageArray) {
 }
 
 // generate error page
-function error(errorCode, specialNote) {
+function error(errorCode, specialNote, request) {
+    if (request.headers['user-agent'] && request.headers['user-agent'].includes('curl')) {
+        return `DELTAModders Server v${require('./package.json').version}\n(You are receiving a pure text output because it appears you are using curl)\nError ${errorCode}: ${specialNote}`;
+    }
     let errorPage = fs.readFileSync('endpoints_assets/error.html', 'utf8');
     errorPage = errorPage.replace('$errorCode', errorCode);
     errorPage = errorPage.replace('$specialNote', specialNote);
@@ -40,15 +43,16 @@ app.use((req, res, next) => {
 
 // Evaluate request
 app.use(async (req, res, next) => {
-    if (flags.maintenance) {
-        res.status(503).send(error(503, "The server is currently under maintenance. Please try again later."));
-        return;
-    }
-
     // check direct file match
     var httpPath = req.path.toLowerCase();
     if (httpPath.endsWith('/')) {
         httpPath += 'index.html';
+    }
+
+    // serve maintenance page only if maintenance flag is set and the request is for an HTML page
+    if (flags.maintenance && (httpPath.endsWith('.html') || fs.existsSync(path.join(__dirname, 'endpoints', httpPath + '.endpoint.js')))) {
+        res.status(503).send(error(503, "The server is currently under maintenance. Please try again later.", req));
+        return;
     }
 
     if (fs.existsSync(path.join(__dirname, 'endpoints', httpPath))) {
@@ -82,7 +86,7 @@ app.use((req, res, next) => {
     if (req.url == '/thankyou') {
         msg = "...no problem?"; // easter egg
     }
-    res.status(404).send(error(404, msg));
+    res.status(404).send(error(404, msg, req));
 });
 
 app.listen(PORT, () => {
