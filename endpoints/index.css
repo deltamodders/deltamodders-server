@@ -217,3 +217,15 @@ body {
     background-color: black;
     font-family: 'DELTARUNE', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.wipSpan {
+    background-color: rgb(203, 117, 5);
+    color: white;
+    font-size: 0.7em;
+    margin-left: 5px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+}
