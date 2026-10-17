@@ -1,17 +1,23 @@
 .topbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 20px;
+    left: 20px;
+    right: 20px;
     height: 60px;
     display: flex;
-    align-items:flex-end;
-    padding: 10px 40px;
-    background: url("./assets/sbar.svg") repeat-x;
+    align-items: center;
+    padding-left: 40px;
+    background-color: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border: 3px solid rgb(255, 255, 255);
     z-index: 2;
+    gap: 20px;
 }
-.topbar > * {
-    transform: translateY(-10px);
+
+.topbar > a {
+    color: rgb(255, 255, 149);
+    font-family: 'DELTARUNE', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
 }
 
 button.disabled {
@@ -36,7 +42,7 @@ button.disabled {
 }
 
 button {
-    padding: 8px 15px;
+    padding: 8px 25px;
     background: linear-gradient(180deg, #3f3f3f 0%, #262626 100%);
     color: white;
     border: none;
@@ -46,7 +52,9 @@ button {
     font-family: 'DELTARUNE', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
+    min-width: 100px;
+    max-width: 200px;
 }
 
 blue {
@@ -62,15 +70,14 @@ button:hover {
     margin-top: 10px;
     opacity: 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     
     gap: 10px;
 
     padding: 10px;
 
-    transition: all 0.9s ease;
+    transition: all 0.4s ease;
 }
 
 @font-face {
@@ -83,8 +90,8 @@ button:hover {
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% { opacity: 0; scale: 0.9; transform: translateY(40px) rotateY(90deg); }
+    100% { opacity: 1; scale: 1; transform: translateY(0) rotateY(0); }
 }
 
 
@@ -127,7 +134,7 @@ small {
 
     backdrop-filter: blur(0px);
 
-    transition: all 0.5s ease;
+    transition: all 0.4s ease;
 }
 
 .projectCard > .content > .txt > .authors {
@@ -140,11 +147,11 @@ small {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.2);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
 
-    transition: all 0.5s ease;
+    transition: all 0.4s ease;
 }
 
 /* Hide scrollbar for WebKit browsers */
@@ -157,6 +164,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .projectCard {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
     opacity: 0;
 
     display: flex;
@@ -168,12 +179,30 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     user-select: none;
 
-    border-left: 2px solid rgba(125, 125, 125, 0.5);
-    border-right: 2px solid rgba(125, 125, 125, 0.5);
+    border-left: 2px solid rgba(125, 125, 125, 0.9);
+    border-right: 2px solid rgba(125, 125, 125, 0.9);
 
+    transition: all 0.4s ease;
+}
+
+/* Background image layer */
+.projectCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background-image: inherit;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    transform: scale(1);
+    transition: transform 0.4s ease;
+}
+
+.projectCard:hover::before {
+    transform: scale(1.1);
 }
 
 .viewport > .projectCard {
