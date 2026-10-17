@@ -370,7 +370,7 @@ app.use((req, res, next) => {
 
 app.listen(PORT, () => {
     console.log(`Webserver is running on port ${PORT}`);
-    if (PORT == 3000) {
-        execSync('start http://localhost:3000');
+    if (PORT == 4000) {
+        execSync('start http://localhost:4000');
     }
 });
