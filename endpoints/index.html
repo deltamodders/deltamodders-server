@@ -15,7 +15,11 @@
 <body>
     <div>
         <div class="topbar">
-            <img src="assets/logo.png" alt="" srcset="" width="200">
+            <img src="assets/logo.png" width="200">
+            <a href="/">Home</a>
+            <a href="https://github.com/deltamodders">GitHub</a>
+            <a href="/discord">Discord</a>
+            <a href="mailto:support@deltamodders.com">Contact</a>
         </div>
         <div class="viewport">
             <div class="projectCard" style="background-image: url('./assets/deltamodBG.png')">
@@ -46,17 +50,14 @@
                 <div class="content">
                     <div class="txt">
                         <img src="assets/remoterune.png" alt="" width="80" height="80">
-                        <h2>REMOTERune</h2>
+                        <h2>REMOTERune <span class="wipSpan">
+                            <span class="material-symbols-outlined">construction</span>
+                            WiP
+                        </span></h2>
                         <span>DELTARUNE reimagined as a multiplayer game.</span>
                         <small class="authors">Owned by mc-intosh</small>
                     </div>
                     <div class="downloads">
-                        <button class="disabled" disabled>
-                            <span class="material-symbols-outlined">download</span>
-                            <div style="text-align: left;">
-                                <i>Not yet released</i>
-                            </div>
-                        </button>
                         <button onclick="window.open('https://remoterune.net')">
                             <span class="material-symbols-outlined">open_in_new</span>
                             Website
@@ -115,7 +116,7 @@
             const data = await response.json();
             el.innerHTML = `Join us!<br><small>${data.presence_count} online</small>`;
             document.getElementById('discordButton').onclick = () => {
-                window.open('https://deltamodders.com/discord', '_blank');
+                window.open('/discord', '_blank');
             };
         } catch (e) {
             console.error('Failed to load Discord data:', e);
@@ -126,7 +127,7 @@
     document.querySelectorAll('.projectCard').forEach(card => {
         i++;
         card.style.opacity = 0;
-        card.style.animation = `fadeIn 0.9s ease ${(i * 0.2)}s forwards`;
+        card.style.animation = `fadeIn 0.7s ease ${(i * 0.2)}s forwards`;
 
         card.addEventListener('mouseover', () => {
             card.querySelector('.content > .downloads').style.opacity = 1;
