@@ -47,7 +47,7 @@ app.use(async (req, res, next) => {
     var isDebugCall = req.headers['user-agent'].includes('deltamodders-dev');
 
     // check direct file match
-    var httpPath = req.path.toLowerCase();
+    var httpPath = req.path;
     if (httpPath.endsWith('/')) {
         httpPath += 'index.html';
     }
