@@ -1,6 +1,8 @@
-const fs = require('fs');
+require('module-alias/register');
 
-function run(req, res, error, log) {
+const fs = require('fs');
+const { error, log } = require('@root/Server');
+function run(req, res) {
     const latestData = JSON.parse(fs.readFileSync('endpoints_assets/deltamodLatest.json', 'utf8'));
     const userVersion = req.query.v || null;
     if (!userVersion) {

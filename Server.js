@@ -69,7 +69,7 @@ app.use(async (req, res, next) => {
     if (isDebugCall) { log(`Debug call: ${req.method} ${req.path} (endpoint path = ${path.join(serverFilePath, 'endpoints', httpPath + '.endpoint.js')})`); }
     var endpointPath = path.join(serverFilePath, 'endpoints', httpPath + '.endpoint.js');
     if (fs.existsSync(endpointPath)) {
-        await require(endpointPath)(req, res, error, log);
+        await require(endpointPath)(req, res);
         return;
     }
 

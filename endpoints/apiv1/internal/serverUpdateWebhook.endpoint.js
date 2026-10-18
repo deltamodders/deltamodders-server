@@ -1,7 +1,10 @@
+require('module-alias/register');
+
 const path = require('path');
 const { execSync } = require('child_process');
+const { error, log } = require('@root/Server');
 
-function run(req, res, error, log) {
+function run(req, res) {
     log("Updating server (triggered by webhook)");
 
     if (process.argv.includes('--dev')) {
