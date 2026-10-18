@@ -18,35 +18,40 @@
             <img src="assets/logo.png" width="200">
             <a href="/">Home</a>
             <a href="https://github.com/deltamodders">GitHub</a>
-            <a href="/discord">Discord</a>
             <a href="mailto:support@deltamodders.com">Contact</a>
         </div>
         <div class="viewport">
-            <div class="projectCard" style="background-image: url('./assets/deltamodBG.png')">
+            <div class="projectCard" style="background-image: url('./assets/deltamodBG.png')" data-project="deltamod">
                 <div class="content">
                     <div class="txt">
                         <img src="assets/deltamod.png" alt="" width="80" height="80">
                         <h2>Deltamod</h2>
                         <span>A mod manager for GameMaker games.</span>
-                        <small class="authors">Owned by GhinoRhino & mc-intosh</small>
+                        <small class="authors">by <img src="assets/pfp/ghino.png" class="pfp" alt="GhinoRhino" width="20" height="20"> GhinoRhino</small>
                     </div>
                     <div class="downloads">
-                        <button onclick="window.open('https://ghinorhino.itch.io/deltamod')">
+                        <button onclick="linkopen('https://github.com/deltamodders/deltamod/releases', 'deltamod')">
                             <span class="material-symbols-outlined">download</span>
                             <div style="text-align: left;">
-                                Itch.io
+                                GitHub
                             </div>
                         </button>
-                        <button onclick="window.open('https://gamebanana.com/tools/20575')">
+                        <button onclick="linkopen('https://gamebanana.com/tools/20575', 'deltamod')">
                             <span class="material-symbols-outlined">download</span>
                             <div style="text-align: left;">
                                 GameBanana
                             </div>
                         </button>
+                        <button onclick="linkopen('https://ghinorhino.itch.io/deltamod', 'deltamod')">
+                            <span class="material-symbols-outlined">download</span>
+                            <div style="text-align: left;">
+                                Itch.io
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="projectCard" style="background-image: url('./assets/remoteruneBG.png')">
+            <div class="projectCard" style="background-image: url('./assets/remoteruneBG.png')" data-project="remoterune">
                 <div class="content">
                     <div class="txt">
                         <img src="assets/remoterune.png" alt="" width="80" height="80">
@@ -55,48 +60,46 @@
                             WiP
                         </span></h2>
                         <span>DELTARUNE reimagined as a multiplayer game.</span>
-                        <small class="authors">Owned by mc-intosh</small>
+                        <small class="authors">by <img src="assets/pfp/mc.png" class="pfp" alt="mc-intosh" width="20" height="20"> mc-intosh</small>
                     </div>
                     <div class="downloads">
-                        <button onclick="window.open('https://remoterune.net')">
+                        <button onclick="linkopen('https://remoterune.net', 'remoterune')">
                             <span class="material-symbols-outlined">open_in_new</span>
                             Website
                         </button>
-                        <button onclick="window.open('https://gamebanana.com/wips/94758')">
+                        <button onclick="linkopen('https://gamebanana.com/wips/94758', 'remoterune')">
                             <span class="material-symbols-outlined">open_in_new</span>
                             GameBanana
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="projectCard" style="background-image: url('./assets/discordBG.png')">
+            <div class="projectCard" style="background-image: url('./assets/discordBG.png')" data-project="discord">
                 <div class="content">
                     <div class="txt">
                         <img src="assets/discord.svg" alt="" width="80" height="80">
-                        <h2>Community</h2>
+                        <h2>Community <span class="discordSpan"></span></h2>
                         <span>Join our modding community on Discord!</span>
-                        <small class="authors">Owned by mc-intosh</small>
+                        <small class="authors">by <img src="assets/pfp/mc.png" class="pfp" alt="mc-intosh" width="20" height="20"> mc-intosh</small>
                     </div>
                     <div class="downloads">
-                        <button id="discordButton">
-                            <span class="material-symbols-outlined">open_in_new</span>
-                            <div id="discordButtonText">
-                                Join us!
-                            </div>
+                        <button onclick="linkopen('/discord', 'discord')">
+                            <span class="material-symbols-outlined">forum</span>
+                            Join the community
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="projectCard" style="background-image: url('./assets/gm3pBG.png')">
+            <div class="projectCard" style="background-image: url('./assets/gm3pBG.png')" data-project="gm3p">
                 <div class="content">
                     <div class="txt">
                         <img src="assets/gm3p.svg" alt="" width="80" height="80">
                         <h2>GM3P</h2>
                         <span>A mod merger for GameMaker .xdelta patches.</span>
-                        <small class="authors">Owned by techy804</small>
+                        <small class="authors">by <img src="assets/pfp/techy.png" class="pfp" alt="techy804" width="20" height="20"> techy804</small>
                     </div>
                     <div class="downloads">
-                        <button onclick="window.open('https://gamebanana.com/tools/20063')">
+                        <button onclick="linkopen('https://gamebanana.com/tools/20063', 'gm3p')">
                             <span class="material-symbols-outlined">download</span>
                             <div style="text-align: left;">
                                 GameBanana
@@ -105,24 +108,55 @@
                     </div>
                 </div>
             </div>
-
+            <div class="projectCard" style="background-image: url('./assets/deltamodkitBG.jpg')" data-project="deltamodkit">
+                <div class="content">
+                    <div class="txt">
+                        <img src="assets/deltamodkit.png" alt="" width="80" height="80">
+                        <h2>DELTAModKit</h2>
+                        <span>A versatile and modular DELTARUNE mod base</span>
+                        <small class="authors">by <img src="assets/pfp/mc.png" class="pfp" alt="mc-intosh" width="20" height="20"> mc-intosh</small>
+                    </div>
+                    <div class="downloads">
+                        <button onclick="linkopen('https://github.com/deltamodders/deltamodkit', 'deltamodkit')">
+                            <span class="material-symbols-outlined">download</span>
+                            <div style="text-align: left;">
+                                GitHub
+                            </div>
+                        </button>
+                        <button onclick="linkopen('https://gamebanana.com/tools/20134', 'deltamodkit')">
+                            <span class="material-symbols-outlined">download</span>
+                            <div style="text-align: left;">
+                                GameBanana
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
     </div>
 </body>
 
 <script>
+    async function impression(project, domain, points) {
+        fetch(`/apiv2/impression?p=${project}&d=${domain}&e=${points}`);
+    }
+    async function linkopen(url, impressionProject) {
+        var domain = new URL(url).hostname;
+
+        window.open(url);
+
+        impression(impressionProject, domain, 3);
+    }
     async function loadDiscordData(el) {
         try {
             const response = await fetch('https://discord.com/api/guilds/1390331292993982484/widget.json');
             const data = await response.json();
-            el.innerHTML = `Join us!<br><small>${data.presence_count} online</small>`;
-            document.getElementById('discordButton').onclick = () => {
-                window.open('/discord', '_blank');
-            };
+            el.innerHTML = data.presence_count + ' online';
         } catch (e) {
             console.error('Failed to load Discord data:', e);
         }
     }
-    loadDiscordData(document.getElementById('discordButtonText'));
+    loadDiscordData(document.querySelector('.discordSpan'));
+
     var i = -1;
     document.querySelectorAll('.projectCard').forEach(card => {
         i++;
@@ -131,31 +165,21 @@
 
         card.addEventListener('mouseover', () => {
             card.querySelector('.content > .downloads').style.opacity = 1;
+            let hoverTimeout = setTimeout(() => {
+                if (card.dataset.impressed) {
+                    return;
+                }
+                card.dataset.impressed = true;
+                impression(card.dataset.project, 'generic', 1);
+            }, 2600);
+            card.addEventListener('mouseout', () => {
+                clearTimeout(hoverTimeout);
+            }, { once: true });
         });
         card.addEventListener('mouseout', () => {
             card.querySelector('.content > .downloads').style.opacity = 0;
         });
     });
-
-    /*
-    var remoteruneTimer = document.getElementById('remoteruneTimer');
-    var date1 = new Date("2026-08-22T16:00:00+02:00");
-    
-    function updateTimer() {
-        var now = new Date();
-        var diff = date1 - now;
-
-        if (diff <= 0) {
-            remoteruneTimer.textContent = "0 hours";
-            return;
-        }
-
-        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        remoteruneTimer.textContent = `Releasing in ${days} days`;
-    }
-
-    updateTimer();
-    */
 </script>
 
 </html>
