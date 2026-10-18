@@ -17,18 +17,32 @@
         <div class="topbar">
             <img src="/assets/logo.png" alt="" srcset="" width="200">
         </div>
-        <div class="viewport" style="justify-content: center; align-items: center;">
+        <div class="viewport" style="justify-content: center; align-items: center; flex-direction: column;">
+            <!-- contents of box -->
             <div class="errorBox">
                 <h1 style="font-size: 3rem;">$errorCode</h1>
                 <p>* $specialNote</p>
+            </div>
+            <div class="infoBox">
+                <p>* You seem lost, young fella...</p>
+                <p>* ...perhaps you would like to go back to the <a href="/">homepage</a>?</p>
             </div>
         </div>
     </div>
 </body>
 
 <style>
+    a {
+        color: rgb(99, 191, 230);
+        text-decoration: none;
+    }
     h1 {
         margin-top: 0;
+        margin-bottom: 0.5rem;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
     }
     .errorBox {
         display: inline-flex; 
@@ -38,11 +52,36 @@
         text-align: center; 
         flex-direction: column; 
         padding: 50px;
+        background-color: rgba(230, 99, 99, 0.5);
         border: 1px solid rgb(230, 99, 99);
-        color: rgb(230, 99, 99);
-        border-radius: 10px;
+        color: rgb(255, 255, 255);
+        border-radius: 20px;
+
+        width: 40dvw;
 
         height: fit-content !important;
+    }
+    .infoBox {
+        margin-top: 30px;
+        display: inline-flex; 
+        justify-content: center; 
+        align-items: center; 
+        color: white; 
+        text-align: center; 
+        flex-direction: column; 
+        padding: 50px;
+        border: 1px solid rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+        border-radius: 20px;
+
+        width: 40dvw;
+
+        height: fit-content !important;
+    }
+
+    .infoBox > p {
+        font-size: 1.2rem;
+        margin: 0;
     }
 </style>
 </html>

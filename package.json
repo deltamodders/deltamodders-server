@@ -1,6 +1,6 @@
 {
   "name": "deltamodders-com",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "DELTAModders.com Website Code",
   "license": "UNLICENSED",
   "author": "DELTAModders",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^1.18.1",
+    "chalk": "^4.0.0",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3"
   },
@@ -20,6 +21,6 @@
     "eslint": "^10.9.1"
   },
   "flags": {
-    "ITCH_IO_SERVICE": true
+    "maintenance": false
   }
 }
