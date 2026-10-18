@@ -7,6 +7,7 @@ const PORT = (parseInt(process.argv[process.argv.indexOf('--port') + 1]) || 3000
 const execSync = require('child_process').execSync;
 const flags = require('./package.json').flags || {};
 const chalk = require('chalk');
+const serverFilePath = path.dirname(require.main?.filename || process.argv[1]);
 
 // console help functions
 function clear() {
@@ -43,6 +44,8 @@ app.use((req, res, next) => {
 
 // Evaluate request
 app.use(async (req, res, next) => {
+    var isDebugCall = req.headers['user-agent'].includes('deltamodders-dev');
+
     // check direct file match
     var httpPath = req.path.toLowerCase();
     if (httpPath.endsWith('/')) {
@@ -50,30 +53,36 @@ app.use(async (req, res, next) => {
     }
 
     // serve maintenance page only if maintenance flag is set and the request is for an HTML page
-    if (flags.maintenance && (httpPath.endsWith('.html') || fs.existsSync(path.join(__dirname, 'endpoints', httpPath + '.endpoint.js')))) {
+    if (flags.maintenance && (httpPath.endsWith('.html') || fs.existsSync(path.join(serverFilePath, 'endpoints', httpPath + '.endpoint.js')))) {
         res.status(503).send(error(503, "The server is currently under maintenance. Please try again later.", req));
         return;
     }
 
-    if (fs.existsSync(path.join(__dirname, 'endpoints', httpPath))) {
-        res.sendFile(path.join(__dirname, 'endpoints', httpPath));
+    // static file match
+    if (isDebugCall) { log(`Debug call: ${req.method} ${req.path} (static path = ${path.join(serverFilePath, 'endpoints', httpPath)})`); }
+    if (fs.existsSync(path.join(serverFilePath, 'endpoints', httpPath))) {
+        res.sendFile(path.join(serverFilePath, 'endpoints', httpPath));
         return;
     }
 
     // check .endpoint.js match
-    var endpointPath = path.join(__dirname, 'endpoints', httpPath + '.endpoint.js');
+    if (isDebugCall) { log(`Debug call: ${req.method} ${req.path} (endpoint path = ${path.join(serverFilePath, 'endpoints', httpPath + '.endpoint.js')})`); }
+    var endpointPath = path.join(serverFilePath, 'endpoints', httpPath + '.endpoint.js');
     if (fs.existsSync(endpointPath)) {
         await require(endpointPath)(req, res, error, log);
         return;
     }
 
     // check .redir
-    var redirPath = path.join(__dirname, 'endpoints', httpPath + '.redir');
+    if (isDebugCall) { log(`Debug call: ${req.method} ${req.path} (redir path = ${path.join(serverFilePath, 'endpoints', httpPath + '.redir')})`); }
+    var redirPath = path.join(serverFilePath, 'endpoints', httpPath + '.redir');
     if (fs.existsSync(redirPath)) {
         var redirUrl = fs.readFileSync(redirPath, 'utf8').trim();
         res.redirect(redirUrl);
         return;
     }
+
+    if (isDebugCall) { log(`Debug call: ${req.method} ${req.path} (no match)`); }
 
     // if no match, continue to next middleware
     next();
